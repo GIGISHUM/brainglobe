@@ -1,7 +1,6 @@
 # BrainGlobe
 
 ## Overview
-All BrainGlobe tools (e.g., brainreg, cellfinder, brainrender, etc) are napari plugins. <br/>
 
 **Short version**: Raw 3D images are imported in napari → You select an atlas to register it on your sample → You detect cell and get cell coordinates in 3D → You visualize it and create cool animations <br/>
 
