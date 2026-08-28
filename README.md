@@ -1,7 +1,17 @@
 # BrainGlobe
 
 ## Overview
-All BrainGlobe tools (e.g., brainreg, cellfinder, brainrender, etc) are napari plugins. 
+All BrainGlobe tools (e.g., brainreg, cellfinder, brainrender, etc) are napari plugins. <br/>
+
+**Short version**: Raw 3D images are imported in napari → You select an atlas to register it on your sample → You detect cell and get cell coordinates in 3D → You visualize it and create cool animations <br/>
+
+**Long version**: You obtain high-resolution, volumetric data of a sample brain using techniques like BrainSaw, two-photon serial tomography, whole-brain light sheet microscopy, etc → You select an appropriate atlas, at an appropriate age, at an appropriate resolution for it (e.g., Allen Adult Mouse Brain Atlas 25µm) → It does some fancy linear affine transformation then non-linear B-spine transformation → Ultimately the atlas template brain is transformed to your sample brain (and or vice versa) and generates deformation matrices which tells exactly how template and sample spaces should morph to match → You load both raw 3D volumes of the signal and background channels for cell detection → It does some fancy candidate detection algorithm with a 2D filter, then a 3D filter, then some structural splitting → Ultimately you get two layers of 3D coordinates of detected and rejected cells → These two output (transformation and cell coordinates) are combined together to create cool animations
+
+## Official documentation
+`BrainGlobe` [Documentation](https://brainglobe.info/index.html) <br/>
+`brainreg` [Documentation](https://brainglobe.info/documentation/brainreg/index.html) <br/>
+`cellfinder` [Documentation](https://brainglobe.info/documentation/cellfinder/index.html) <br/>
+`brainrender` [Documentation](https://brainglobe.info/documentation/brainrender/index.html) <br/>
 
 ## Installation
 Create virtual environment called brainglobe: <br/>
@@ -28,24 +38,12 @@ Install brainrender: <br/>
 
 
 ## Add virtual environment to Jupyter Notebook
-`pip install --user ipykernel`<br/>
+`conda activate brainglobe`<br/>
+`pip install ipykernel`<br/>
 `python -m ipykernel install --user --name=brainglobe`<br/>
 
-## Using brainreg
-brainreg is a tool to map a template atlas to your sample space, and vice versa. 
+## Workflow
+`brainreg` → `cellfinder` → `brainmapper` (napari widget) → `brainrender`, OR <br/>
+`brainmapper` (one-line command line tool) → `brainrender`
 
-## Using cellfinder
-cellfinder detects the center coordinates of fluorescently labelled cells (bright spots of given size). It _detects_ cells, but does not _segment_ cells. So it allows you to count the number of cells and register the cell coordinates, but it will not create outlines of cells.
 
-cellfinder runs on 3D images (e.g., serial two-photon tomography, whole brain light sheet microscopy, BrainSaw, etc). It needs two channels: **signal** (where your real cells are) and **background** (autofluorescence channel). 
-
-To run cellfinder, you need to know:
-* s The primary signal channel: test_brain/ch00.
-* -b The secondary autofluorescence channel (or background): test_brain/ch01.
-* -o The output directory : test_brain/output.
-* --orientation The data orientation: psl.
-* -v The voxel spacing in the same order as the data orientation (psl): 5 2 2.
-* --atlas The atlas we want to use: allen_mouse_10um.
-
-So, to run cellfinder, go to your designated brainglobe virtual environment, and run in the terminal something like this:
-brainmapper -s test_brain/ch00 -b test_brain/ch01 -o test_brain/output -v 5 2 2 --orientation psl --atlas allen_mouse_10um
