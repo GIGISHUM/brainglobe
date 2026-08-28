@@ -1,6 +1,7 @@
 # BrainGlobe
 
 ## Overview
+<img width="636" height="583" alt="BrainGlobe workflow" src="https://github.com/user-attachments/assets/bcf2b9d5-b0e8-4b15-a362-b0e4d8202e54" />
 
 **Short version**: Raw 3D images are imported in napari → You select an atlas to register it on your sample → You detect cell and get cell coordinates in 3D → You visualize it and create cool animations <br/>
 
