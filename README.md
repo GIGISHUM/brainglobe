@@ -3,6 +3,34 @@
 ## Overview
 All BrainGlobe tools (e.g., brainreg, cellfinder, brainrender, etc) are napari plugins. 
 
+## Installation
+Create virtual environment called brainglobe: <br/>
+`conda create -c conda-forge --name brainglobe python=3.12`<br/>
+
+Install napari: <br/>
+`conda install -c conda-forge napari pyqt6`<br/>
+
+Install BrainGlobe core packages: <br/>
+`pip install brainglobe`<br/>
+
+Install brainreg: <br/>
+`conda install -c conda-forge brainreg` (for Mac users) <br/>
+`conda install -c conda-forge niftyreg` (for Mac users) <br/>
+
+Install cellfinder: <br/>
+`pip install cellfinder[napari]`<br/>
+
+Install brainrender: <br/>
+`conda install -c conda-forge ffmpeg` <br/>
+`conda install -c conda-forge pyside2` <br/>
+`conda install -c conda-forge hdf5` (for Mac users) <br/>
+`pip install brainrender`<br/>
+
+
+## Add virtual environment to Jupyter Notebook
+`pip install --user ipykernel`<br/>
+`python -m ipykernel install --user --name=brainglobe`<br/>
+
 ## Using brainreg
 brainreg is a tool to map a template atlas to your sample space, and vice versa. 
 
